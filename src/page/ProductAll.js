@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ProductCard from '../component/ProductCard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
+import { productAction } from '../store/actions/productAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ProductAll = () => {
-  const [productCard, setProductCard] = useState([]);
+  const dispatch = useDispatch();
+  const productCard = useSelector((state) => state.product.productCard);
   const [query, setQuery] = useSearchParams();
-  const getProduct = async () => {
-    let searchQuery = query.get('q') || '';
-    let url = `https://my-json-server.typicode.com/Exit-c/exit_hnm/products?q=${searchQuery}`;
-    let response = await fetch(url);
-    let data = await response.json();
 
-    console.log(data);
-    setProductCard(data);
+  // json products 가져오기
+  const getProducts = () => {
+    let searchQuery = query.get('q') || ''; // 'q'라는 쿼리 값을 가져옴 없을시 ''로 빈문자열 할당
+
+    dispatch(productAction.getProduct(searchQuery)); // searchQuery를 넘겨줌
   };
+
   useEffect(() => {
-    getProduct();
+    getProducts();
   }, [query]);
 
   return (

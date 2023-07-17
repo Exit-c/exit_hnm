@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setAuthenticate }) => {
   const navigator = useNavigate();
+
+  // 유저 로그인
   const userLoginSubmit = (e) => {
     e.preventDefault();
 
     setAuthenticate(true);
     navigator(`/`);
   };
+
   return (
     <Container>
       <Form onSubmit={(e) => userLoginSubmit(e)}>

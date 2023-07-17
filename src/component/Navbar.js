@@ -5,50 +5,50 @@ import styled from 'styled-components';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ authenticate, setAuthenticate }) => {
-  const StyleHeader = styled.header`
-    .login {
-      display: flex;
-      justify-content: flex-end;
-      margin: 30px;
-    }
-    .my-custom-class {
-      font-size: 18px;
-    }
-    .login div {
-      margin-left: 10px;
-      cursor: pointer;
-    }
-    .herder-logo {
-      display: flex;
-      justify-content: center;
-    }
-    .herder-logo img {
-      width: 80px;
-      cursor: pointer;
-    }
-    .nav {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-    }
-    .nav li {
-      padding: 20px;
-    }
-    .search {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: -40px;
-      margin-right: 20px;
-    }
-    .search input {
-      margin-left: 10px;
-      outline: none;
-      border: none;
-      border-bottom: 1px solid #333;
-    }
-  `;
+const StyleHeader = styled.header`
+  .login {
+    display: flex;
+    justify-content: flex-end;
+    margin: 30px;
+  }
+  .my-custom-class {
+    font-size: 18px;
+  }
+  .login div {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  .herder-logo {
+    display: flex;
+    justify-content: center;
+  }
+  .herder-logo img {
+    width: 80px;
+    cursor: pointer;
+  }
+  .nav {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+  }
+  .nav li {
+    padding: 20px;
+  }
+  .search {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -40px;
+    margin-right: 20px;
+  }
+  .search input {
+    margin-left: 10px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #333;
+  }
+`;
 
+const Navbar = ({ authenticate, setAuthenticate }) => {
   const navList = [
     '여성',
     'Divied',
@@ -62,6 +62,8 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
   ];
 
   const navigate = useNavigate();
+
+  // 로그인 페이지 이동 및 로그아웃하면 홈화면으로 이동
   const goToLogin = () => {
     if (authenticate !== true) {
       navigate(`/login`);
@@ -70,6 +72,8 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
       navigate(`/`);
     }
   };
+
+  // 검색하여 쿼리생성
   const search = (e) => {
     if (e.key === 'Enter') {
       let keyword = e.target.value;
@@ -77,9 +81,11 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
     }
   };
 
+  // 메인로고 클릭시 홈으로 이동
   const goToHome = () => {
     navigate(`/`);
   };
+
   return (
     <StyleHeader>
       <div className="login">
